@@ -1,0 +1,22 @@
+{
+  "name": "cbi_test_0",
+  "version": "0.0.0",
+  "description": "sample code test for CB Insights",
+  "main": "index.js",
+  "author": "James Dean \"DefiantBidet\"",
+  "license": "MIT",
+  "scripts": {
+    "start": "node .",
+    "test": "ava",
+    "test:watch": "ava -w"
+  },
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "sinon": "^1.17.7"
+  },
+  "ava": {
+    "files": [
+      "*.spec.js"
+    ]
+  }
+}
