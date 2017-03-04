@@ -1,11 +1,13 @@
 # Testing Exercise
+This is a set of samples I'm using to attempt to get a good working grasp of a coding exercise I'm taking for employment.
+
 
 The interview subject concerns optimization of an existing workflow pertaining to a REST API.  
-If you bring your own equipment, here's what you'll need to be able to do:
-  ☐ Receive an API request over HTTP.
-  ☐ Parse the request and assemble an appropriate response.
-  ☐ Be able to manipulate and parse JSON string data.
-  ☐ Be prepared to write and execute tests for the code you write.
+If you bring your own equipment, here's what you'll need to be able to do:  
+  ☐ Receive an API request over HTTP.  
+  ☐ Parse the request and assemble an appropriate response.  
+  ☐ Be able to manipulate and parse JSON string data.  
+  ☐ Be prepared to write and execute tests for the code you write.  
 Finally, your laptop has to be able to connect to a wired Ethernet network and output display to our projector (DisplayPort, HDMI, or VGA).  
 We'll provide the cables.
 
