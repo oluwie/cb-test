@@ -1,38 +1,46 @@
 
-const http = require('http');
+// Required Node Modules
+const KOA            = require('koa');
+const CORS           = require('kcors');
+const BODY_PARSER    = require('koa-bodyparser');
+const LOGGER         = require('koa-logger');
+const RESPONSE_TIME  = require('koa-response-time');
+const CONVERT        = require('koa-convert');
+const SESSION        = require('koa-generic-session');
 
-const API = 'http://localhost:8888/content';
+// Required Local Modules
+const ROUTES = require('./routes');
 
-function main() {
+// ENV Vars
+const PORT = 8888;
 
-  http.get(API, (response) => {
-    const statusCode = response.statusCode;
-    let rawData = '';
-    let parsedData;
+// App
+const APP = new KOA();
 
-    if(statusCode !== 200) {
-      // handle error.
-      // TODO: handle error
+// TODO: session/csrf stuff
 
-      // free up memory
-      response.resume();
-      return;
-    }
+// ALLOW PROXY REQUESTS
+APP.proxy = true;
 
-    response
-      .on('data', (chunk) => rawData += chunk)
-      .on('end',  () => {
-        try {
-          parsedData = JSON.parse(rawData);
-        }
-        catch(err){
-          throw new Error(err);
-        }
-      })
-      .on('error', (err) => {
-        throw new Error(err);
-      });
-  });
-}
+// RESPONSE TIME & LOGGING
+APP.use(CORS());
+APP.use(RESPONSE_TIME());
+APP.use(LOGGER());
 
-exports = module.exports = main;
+// SESSION
+// APP.keys = [SECRET];
+APP.use(CONVERT(SESSION()));
+
+// BODY PARSER
+APP.use(BODY_PARSER({
+  onerror: (err, ctx) => {
+    ctx.throw('Error parsing the body information', 422);
+  },
+}));
+
+APP.use(ROUTES.routes());
+APP.use(ROUTES.allowedMethods());
+
+APP.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
+});
