@@ -8,6 +8,8 @@ const ROUTE = ROUTER();
 // Routes
 ROUTE.get('fetchContent', '/content', contentHandler);
 
+ROUTE.post('postContent', '/postFoo', fooPostHandler);
+
 ROUTE.all('catchAll', '*', errorHandler);
 
 // Route Handlers
@@ -25,6 +27,18 @@ async function contentHandler(context) {
   ctx.body = {
     foo: 'foo'
   };
+  return ctx.body;
+}
+
+
+function fooPostHandler(context) {
+  const ctx = context;
+
+  ctx.status = 200;
+  ctx.body = {
+    foo: 'foo'
+  };
+
   return ctx.body;
 }
 

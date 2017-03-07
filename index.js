@@ -34,7 +34,7 @@ APP.use(CONVERT(SESSION()));
 // BODY PARSER
 APP.use(BODY_PARSER({
   onerror: (err, ctx) => {
-    ctx.throw('Error parsing the body information', 422);
+    ctx.throw(422, 'Error parsing the body information');
   },
 }));
 
