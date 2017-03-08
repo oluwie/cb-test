@@ -44,6 +44,24 @@ async function fooPostHandler(context) {
 }
 
 /**
+ * fooPostHandler
+ * Handles a POST body and returns JSON payload
+ * @param  {Koa.context} context the context object of the route
+ * @return {Koa.response}        the JSON body of the response
+ */
+async function fooPostHandler(context) {
+  const ctx = context;
+  const postData = ctx.request.body;
+  const response = {
+    [postData.foo]: Object.keys(postData)[0]
+  };
+  ctx.status = 200;
+  ctx.body = response;
+
+  return ctx.body;
+}
+
+/**
  * errorHandler
  * Catch All handler for undefined routes
  * @param  {Koa.context} context the context object of the route
