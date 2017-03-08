@@ -1,0 +1,62 @@
+const assert     = require('chai').assert;
+const request    = require('supertest');
+const Koa        = require('koa');
+const bodyParser = require('koa-bodyparser');
+const router     = require('koa-router');
+const routes     = require('.');
+
+suite('Route Handlers', () => {
+  let server;
+
+  suiteSetup(() => {
+    const App = new Koa();
+    App.use(bodyParser());
+    App.use(routes.routes());
+    server = App.listen();
+  });
+
+  suiteTeardown(() => {
+    server.close();
+  });
+
+  test('exposes instance of Koa Router', () => {
+    assert.isTrue(routes instanceof router, 'route is instance of router');
+  });
+
+  test('return 404 for undefined routes', () => {
+    const mockBody = {
+      code: 404,
+      data: {
+        error: 'This is not the endpoint you\'re looking for'
+      }
+    };
+
+    return request(server)
+      .get('/foobar')
+      .expect(404)
+      .expect(mockBody);
+  });
+
+  test('returns content for GET', () => {
+    const mockBody = {
+      foo: 'foo'
+    };
+
+    return request(server)
+      .get('/content')
+      .expect(200)
+      .expect(mockBody);
+  });
+
+  test('handles POST data and returns json payload', () => {
+    const mockRequest = {'foo': 'bar' };
+    const mockBody = { 'bar': 'foo' };
+
+    return request(server)
+      .post('/postFoo')
+      .set('Accept', 'application/json')
+      .send(mockRequest)
+      .expect(200)
+      .expect(mockBody);
+  });
+});
