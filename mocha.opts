@@ -1,0 +1,4 @@
+--globals suite,test,suiteSetup,setup,teardown,suiteTeardown
+--reporter spec
+--timeout 4000
+--ui tdd

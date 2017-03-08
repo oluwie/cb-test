@@ -10,15 +10,17 @@
     "test": "ava",
     "test:watch": "ava -w"
   },
-  "devDependencies": {
-    "ava": "^0.18.2",
-    "sinon": "^1.17.7"
-  },
   "ava": {
     "files": [
       "*.spec.js",
       "**/*.spec.js"
     ]
+  },
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7"
   },
   "dependencies": {
     "kcors": "^2.2.1",

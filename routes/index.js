@@ -31,13 +31,14 @@ async function contentHandler(context) {
 }
 
 
-function fooPostHandler(context) {
+async function fooPostHandler(context) {
   const ctx = context;
-
-  ctx.status = 200;
-  ctx.body = {
-    foo: 'foo'
+  const postData = ctx.request.body;
+  const response = {
+    [postData.foo]: Object.keys(postData)[0]
   };
+  ctx.status = 200;
+  ctx.body = response;
 
   return ctx.body;
 }

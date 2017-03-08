@@ -17,19 +17,10 @@ const PORT = 8888;
 // App
 const APP = new KOA();
 
-// TODO: session/csrf stuff
-
-// ALLOW PROXY REQUESTS
-APP.proxy = true;
-
 // RESPONSE TIME & LOGGING
 APP.use(CORS());
 APP.use(RESPONSE_TIME());
 APP.use(LOGGER());
-
-// SESSION
-// APP.keys = [SECRET];
-APP.use(CONVERT(SESSION()));
 
 // BODY PARSER
 APP.use(BODY_PARSER({
