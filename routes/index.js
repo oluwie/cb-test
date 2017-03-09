@@ -30,19 +30,6 @@ async function contentHandler(context) {
   return ctx.body;
 }
 
-
-async function fooPostHandler(context) {
-  const ctx = context;
-  const postData = ctx.request.body;
-  const response = {
-    [postData.foo]: Object.keys(postData)[0]
-  };
-  ctx.status = 200;
-  ctx.body = response;
-
-  return ctx.body;
-}
-
 /**
  * fooPostHandler
  * Handles a POST body and returns JSON payload
